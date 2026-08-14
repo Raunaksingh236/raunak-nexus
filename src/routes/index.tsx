@@ -252,7 +252,7 @@ function Index() {
                 className="relative h-64 w-64 rounded-full border border-border object-cover sm:h-80 sm:w-80"
                 style={{ boxShadow: "var(--glow-primary)" }}
               />
-              <span className="glass-card absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-2 text-xs whitespace-nowrap text-muted-foreground">
+              <span className="glass-card absolute bottom-[-1.25rem] left-1/2 -translate-x-1/2 bg-card px-4 py-2 text-xs whitespace-nowrap text-muted-foreground">
                 <Sparkles size={12} className="mr-1.5 inline text-primary" />
                 AI / ML Learner
               </span>
