@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Brain,
@@ -100,15 +100,6 @@ function RotatingRole() {
   }, [text, deleting, index]);
 
   return <span aria-label="B.Tech AIML Student | Aspiring AI/ML Developer">{text}</span>;
-}
-
-function LegacySectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return (
-    <div className="mb-12">
-      <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">{eyebrow}</p>
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-    </div>
-  );
 }
 
 function Index() {
@@ -219,7 +210,7 @@ function Index() {
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:singhraunak@gmail.com"
+                href="mailto:singhraunak81026@gmail.com"
                 aria-label="Email"
                 className="transition-all hover:-translate-y-0.5 hover:text-primary"
               >
@@ -439,7 +430,7 @@ function Index() {
         <div className="grid gap-8 md:grid-cols-2">
           <Reveal className="space-y-3">
             {[
-              { icon: Mail, label: "singhraunak@gmail.com", href: "mailto:singhraunak@gmail.com" },
+              { icon: Mail, label: "singhraunak81026@gmail.com", href: "mailto:singhraunak81026@gmail.com" },
               { icon: Phone, label: "9068293089", href: "tel:9068293089" },
               {
                 icon: Github,
@@ -510,7 +501,7 @@ function Index() {
               </button>
               {sent && (
                 <p className="text-center text-xs text-primary">
-                  Thanks! Please also reach out directly at singhraunak@gmail.com.
+                  Thanks! Please also reach out directly at singhraunak81026@gmail.com.
                 </p>
               )}
             </form>
@@ -545,7 +536,7 @@ function Index() {
             >
               <Linkedin size={18} />
             </a>
-            <a href="mailto:singhraunak@gmail.com" aria-label="Email" className="hover:text-primary">
+            <a href="mailto:singhraunak81026@gmail.com" aria-label="Email" className="hover:text-primary">
               <Mail size={18} />
             </a>
           </div>
