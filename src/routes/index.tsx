@@ -245,10 +245,10 @@ function Index() {
                 <span className="absolute right-2 bottom-16 h-1.5 w-1.5 rounded-full bg-primary/70" />
               </div>
               <img
-                src={avatar}
-                alt="Abstract neural network portrait representing Raunak Kumar Singh"
-                width={768}
-                height={768}
+                src={avatar.url}
+                alt="Profile photo of Raunak Kumar Singh"
+                width={600}
+                height={800}
                 className="relative h-64 w-64 rounded-full border border-border object-cover sm:h-80 sm:w-80"
                 style={{ boxShadow: "var(--glow-primary)" }}
               />
