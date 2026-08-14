@@ -69,6 +69,48 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
   );
 }
 
+const roles = [
+  "B.Tech AIML Student",
+  "Aspiring AI/ML Developer",
+  "Python Enthusiast",
+];
+
+function RotatingRole() {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const full = roles[index]!;
+    const done = !deleting && text === full;
+    const cleared = deleting && text === "";
+    const timeout = setTimeout(
+      () => {
+        if (done) return setDeleting(true);
+        if (cleared) {
+          setDeleting(false);
+          setIndex((i) => (i + 1) % roles.length);
+          return;
+        }
+        setText(deleting ? full.slice(0, text.length - 1) : full.slice(0, text.length + 1));
+      },
+      done ? 1600 : deleting ? 35 : 70,
+    );
+    return () => clearTimeout(timeout);
+  }, [text, deleting, index]);
+
+  return <span aria-label="B.Tech AIML Student | Aspiring AI/ML Developer">{text}</span>;
+}
+
+function LegacySectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div className="mb-12">
+      <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">{eyebrow}</p>
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+    </div>
+  );
+}
+
 function Index() {
   const [sent, setSent] = useState(false);
 
