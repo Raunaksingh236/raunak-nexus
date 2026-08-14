@@ -1,24 +1,449 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, type FormEvent } from "react";
+import {
+  ArrowRight,
+  Brain,
+  Code2,
+  Database,
+  Download,
+  Github,
+  GraduationCap,
+  Linkedin,
+  Mail,
+  Phone,
+  Rocket,
+  Sparkles,
+  Terminal,
+} from "lucide-react";
+import { NeuralBackground } from "@/components/NeuralBackground";
+import { Navbar } from "@/components/Navbar";
+import { Reveal } from "@/components/Reveal";
+import avatar from "@/assets/avatar.jpg";
+import aboutVisual from "@/assets/about-visual.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Raunak Kumar Singh — B.Tech AIML Student & Aspiring AI/ML Developer" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Raunak Kumar Singh, second-year B.Tech AIML student at GLA University Mathura, exploring Python, machine learning, data analysis and software development.",
+      },
+      { property: "og:title", content: "Raunak Kumar Singh — AIML Student Portfolio" },
+      {
+        property: "og:description",
+        content:
+          "AI/ML learner building skills in Python, machine learning, data analysis and web development. Class of 2029, GLA University Mathura.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const skills = [
+  { name: "Python", level: 70, icon: Terminal, featured: true },
+  { name: "AI & Machine Learning", level: 55, icon: Brain, featured: true },
+  { name: "Java", level: 50, icon: Code2 },
+  { name: "HTML", level: 75, icon: Code2 },
+  { name: "CSS", level: 65, icon: Code2 },
+  { name: "JavaScript", level: 50, icon: Code2 },
+  { name: "SQL (Basics)", level: 40, icon: Database },
+];
+
+const exploring = [
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Python Development",
+  "Data Analysis",
+  "Software Development",
+  "Web Development",
+];
+
+function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mb-12">
+      <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">{eyebrow}</p>
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+    </div>
+  );
+}
+
+function Index() {
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+      <Navbar />
+
+      {/* Hero */}
+      <section id="home" className="relative isolate overflow-hidden pt-32 pb-24">
+        <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
+        <div
+          className="absolute inset-0"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden="true"
+        />
+        <NeuralBackground />
+
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-[1.15fr_0.85fr]">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-4 py-1.5 text-xs text-muted-foreground">
+              <Sparkles size={14} className="text-primary" />
+              Class of 2029 · GLA University, Mathura
+            </span>
+            <h1 className="mt-6 text-4xl leading-[1.05] font-bold tracking-tight sm:text-6xl">
+              Raunak Kumar <span className="text-gradient">Singh</span>
+            </h1>
+            <p className="mt-4 text-lg font-medium text-primary sm:text-xl">
+              B.Tech AIML Student | Aspiring AI/ML Developer
+            </p>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+              A technology-passionate student exploring Artificial Intelligence, Machine Learning,
+              Python, data analysis and software development.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <a
+                href="#skills"
+                className="animate-pulse-ring inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
+              >
+                View My Skills <ArrowRight size={16} />
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+              >
+                Contact Me
+              </a>
+            </div>
+            <div className="mt-10 flex items-center gap-5 text-muted-foreground">
+              <a
+                href="https://github.com/Raunaksingh236"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="transition-colors hover:text-primary"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/raunak-singh-68bb133b7/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-primary"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="mailto:singhraunak@gmail.com"
+                aria-label="Email"
+                className="transition-colors hover:text-primary"
+              >
+                <Mail size={20} />
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={150} className="justify-self-center">
+            <div className="animate-float-soft relative">
+              <div
+                className="absolute -inset-6 rounded-[2.5rem] blur-2xl"
+                style={{ background: "var(--gradient-hero)" }}
+                aria-hidden="true"
+              />
+              <img
+                src={avatar}
+                alt="Abstract neural network portrait representing Raunak Kumar Singh"
+                width={768}
+                height={768}
+                className="relative h-64 w-64 rounded-[2rem] border border-border object-cover sm:h-80 sm:w-80"
+                style={{ boxShadow: "var(--glow-primary)" }}
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <SectionTitle eyebrow="About" title="A student building toward AI" />
+        </Reveal>
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <Reveal>
+            <img
+              src={aboutVisual}
+              alt="Glowing neural network visualization"
+              loading="lazy"
+              width={1200}
+              height={900}
+              className="w-full rounded-3xl border border-border object-cover"
+            />
+          </Reveal>
+          <Reveal delay={120} className="space-y-5 text-muted-foreground">
+            <p className="leading-relaxed">
+              I'm Raunak, a second-year B.Tech student passionate about technology and constantly
+              learning new skills. Right now I'm exploring Artificial Intelligence and Machine
+              Learning, with a strong interest in Python, data analysis and software development.
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {[
+                "Building projects",
+                "Solving programming problems",
+                "Learning new technologies",
+                "Improving technical skills",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="glass-card flex items-center gap-3 px-4 py-3 text-sm text-foreground"
+                >
+                  <span className="h-2 w-2 rounded-full bg-primary" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="leading-relaxed">
+              My goal is to grow into a skilled developer and use technology to create practical,
+              meaningful solutions.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Education */}
+      <section id="education" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <SectionTitle eyebrow="Education" title="Academic timeline" />
+        </Reveal>
+        <div className="relative border-l border-border pl-8">
+          <Reveal className="relative">
+            <span className="absolute top-6 -left-[41px] grid h-6 w-6 place-items-center rounded-full border border-primary bg-background">
+              <GraduationCap size={13} className="text-primary" />
+            </span>
+            <article className="glass-card p-7">
+              <p className="text-xs tracking-widest text-primary uppercase">2nd Year · Ongoing</p>
+              <h3 className="mt-2 text-xl font-semibold">
+                B.Tech in Artificial Intelligence &amp; Machine Learning
+              </h3>
+              <p className="mt-1 text-muted-foreground">GLA University, Mathura</p>
+              <p className="mt-4 text-sm text-muted-foreground">Expected graduation: 2029</p>
+            </article>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <SectionTitle eyebrow="Skills" title="Currently developing" />
+        </Reveal>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill, i) => (
+            <Reveal key={skill.name} delay={i * 70}>
+              <div
+                className={`glass-card h-full p-6 ${
+                  skill.featured ? "ring-1 ring-primary/40" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                    <skill.icon size={18} />
+                  </span>
+                  <h3 className="min-w-0 truncate font-semibold">{skill.name}</h3>
+                </div>
+                <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                  <div
+                    className="h-full rounded-full bg-primary transition-[width] duration-1000"
+                    style={{ width: `${skill.level}%`, boxShadow: "var(--glow-primary)" }}
+                  />
+                </div>
+                <p className="mt-3 text-xs text-muted-foreground">
+                  {skill.featured ? "Core focus · actively practising" : "Learning & improving"}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Journey: projects + learning + exploring */}
+      <section id="journey" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <SectionTitle eyebrow="Journey" title="Currently building & learning" />
+        </Reveal>
+
+        <Reveal>
+          <div className="glass-card grid place-items-center px-6 py-16 text-center">
+            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-secondary text-primary">
+              <Rocket size={22} />
+            </span>
+            <h3 className="mt-5 text-2xl font-semibold">My project journey starts here</h3>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              No published projects yet — I'm focused on learning fundamentals and preparing to
+              build. This space is reserved for AI/ML experiments, Python tools, data analysis
+              notebooks and small software projects as they ship.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <Reveal>
+            <div className="glass-card h-full p-7">
+              <h3 className="text-lg font-semibold">Learning Journey</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                I have no professional experience yet. My time goes into academic coursework,
+                developing technical skills, exploring new technologies and preparing to build
+                practical projects that solve real problems.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="glass-card h-full p-7">
+              <h3 className="text-lg font-semibold">Areas I'm Exploring</h3>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {exploring.map((area) => (
+                  <li
+                    key={area}
+                    className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {area}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <SectionTitle eyebrow="Contact" title="Let's connect" />
+        </Reveal>
+        <div className="grid gap-8 md:grid-cols-2">
+          <Reveal className="space-y-3">
+            {[
+              { icon: Mail, label: "singhraunak@gmail.com", href: "mailto:singhraunak@gmail.com" },
+              { icon: Phone, label: "9068293089", href: "tel:9068293089" },
+              {
+                icon: Github,
+                label: "github.com/Raunaksingh236",
+                href: "https://github.com/Raunaksingh236",
+              },
+              {
+                icon: Linkedin,
+                label: "linkedin.com/in/raunak-singh",
+                href: "https://www.linkedin.com/in/raunak-singh-68bb133b7/",
+              },
+            ].map((c) => (
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className="glass-card flex items-center gap-4 px-5 py-4"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                  <c.icon size={18} />
+                </span>
+                <span className="min-w-0 truncate text-sm">{c.label}</span>
+              </a>
+            ))}
+          </Reveal>
+
+          <Reveal delay={120}>
+            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7">
+              <div>
+                <label htmlFor="name" className="mb-1.5 block text-xs text-muted-foreground">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  required
+                  className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="mb-1.5 block text-xs text-muted-foreground">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="mb-1.5 block text-xs text-muted-foreground">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  required
+                  className="w-full resize-none rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
+                />
+              </div>
+              <button
+                type="submit"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
+              >
+                <Download size={16} className="hidden" />
+                Send Message <ArrowRight size={16} />
+              </button>
+              {sent && (
+                <p className="text-center text-xs text-primary">
+                  Thanks! Please also reach out directly at singhraunak@gmail.com.
+                </p>
+              )}
+            </form>
+          </Reveal>
+        </div>
+      </section>
+
+      <footer className="border-t border-border py-10">
+        <div className="mx-auto grid max-w-6xl gap-4 px-5 text-center sm:flex sm:items-center sm:justify-between sm:text-left">
+          <div>
+            <p className="font-semibold">Raunak Kumar Singh</p>
+            <p className="text-xs text-muted-foreground">
+              B.Tech AIML Student | Aspiring AI/ML Developer
+            </p>
+          </div>
+          <div className="flex justify-center gap-5 text-muted-foreground">
+            <a
+              href="https://github.com/Raunaksingh236"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="hover:text-primary"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/raunak-singh-68bb133b7/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="hover:text-primary"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a href="mailto:singhraunak@gmail.com" aria-label="Email" className="hover:text-primary">
+              <Mail size={18} />
+            </a>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Raunak Kumar Singh
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
