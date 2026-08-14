@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Brain,
@@ -69,6 +69,39 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
   );
 }
 
+const roles = [
+  "B.Tech AIML Student",
+  "Aspiring AI/ML Developer",
+  "Python Enthusiast",
+];
+
+function RotatingRole() {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const full = roles[index]!;
+    const done = !deleting && text === full;
+    const cleared = deleting && text === "";
+    const timeout = setTimeout(
+      () => {
+        if (done) return setDeleting(true);
+        if (cleared) {
+          setDeleting(false);
+          setIndex((i) => (i + 1) % roles.length);
+          return;
+        }
+        setText(deleting ? full.slice(0, text.length - 1) : full.slice(0, text.length + 1));
+      },
+      done ? 1600 : deleting ? 35 : 70,
+    );
+    return () => clearTimeout(timeout);
+  }, [text, deleting, index]);
+
+  return <span aria-label="B.Tech AIML Student | Aspiring AI/ML Developer">{text}</span>;
+}
+
 function Index() {
   const [sent, setSent] = useState(false);
 
@@ -82,7 +115,10 @@ function Index() {
       <Navbar />
 
       {/* Hero */}
-      <section id="home" className="relative isolate overflow-hidden pt-32 pb-24">
+      <section
+        id="home"
+        className="relative isolate flex min-h-screen items-center overflow-hidden pt-32 pb-20"
+      >
         <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
         <div
           className="absolute inset-0"
@@ -90,44 +126,77 @@ function Index() {
           aria-hidden="true"
         />
         <NeuralBackground />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"
+          aria-hidden="true"
+        />
 
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-[1.15fr_0.85fr]">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-4 py-1.5 text-xs text-muted-foreground">
-              <Sparkles size={14} className="text-primary" />
-              Class of 2029 · GLA University, Mathura
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-4 py-1.5 text-xs text-muted-foreground backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              Open to learning &amp; collaboration
+              <span className="hidden text-border sm:inline">|</span>
+              <span className="hidden sm:inline">Class of 2029 · GLA University</span>
             </span>
             <h1 className="mt-6 text-4xl leading-[1.05] font-bold tracking-tight sm:text-6xl">
               Raunak Kumar <span className="text-gradient">Singh</span>
             </h1>
-            <p className="mt-4 text-lg font-medium text-primary sm:text-xl">
-              B.Tech AIML Student | Aspiring AI/ML Developer
+            <p className="mt-4 flex min-h-8 items-center text-lg font-medium text-primary sm:text-xl">
+              <RotatingRole />
+              <span className="animate-caret ml-0.5 inline-block h-5 w-[2px] bg-primary align-middle" />
             </p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
               A technology-passionate student exploring Artificial Intelligence, Machine Learning,
               Python, data analysis and software development.
             </p>
+            <ul className="mt-7 flex flex-wrap gap-2">
+              {["Python", "Machine Learning", "Java", "JavaScript", "SQL"].map((t) => (
+                <li
+                  key={t}
+                  className="rounded-full border border-border bg-glass px-3 py-1 text-xs text-muted-foreground backdrop-blur-md transition-colors hover:border-primary hover:text-primary"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
             <div className="mt-9 flex flex-wrap gap-4">
               <a
                 href="#skills"
-                className="animate-pulse-ring inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
+                className="animate-pulse-ring group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
               >
-                View My Skills <ArrowRight size={16} />
+                View My Skills
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-glass px-6 py-3 text-sm font-semibold backdrop-blur-md transition-colors hover:border-primary hover:text-primary"
               >
                 Contact Me
               </a>
             </div>
-            <div className="mt-10 flex items-center gap-5 text-muted-foreground">
+            <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
+              {[
+                { k: "2nd", v: "Year B.Tech" },
+                { k: "AIML", v: "Specialisation" },
+                { k: "2029", v: "Graduating" },
+              ].map((s) => (
+                <div key={s.k} className="glass-card px-4 py-3">
+                  <dt className="text-lg font-bold text-foreground">{s.k}</dt>
+                  <dd className="text-[11px] tracking-wide text-muted-foreground">{s.v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-8 flex items-center gap-5 text-muted-foreground">
               <a
                 href="https://github.com/Raunaksingh236"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="transition-colors hover:text-primary"
+                className="transition-all hover:-translate-y-0.5 hover:text-primary"
               >
                 <Github size={20} />
               </a>
@@ -136,14 +205,14 @@ function Index() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="transition-colors hover:text-primary"
+                className="transition-all hover:-translate-y-0.5 hover:text-primary"
               >
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:singhraunak@gmail.com"
+                href="mailto:singhraunak81026@gmail.com"
                 aria-label="Email"
-                className="transition-colors hover:text-primary"
+                className="transition-all hover:-translate-y-0.5 hover:text-primary"
               >
                 <Mail size={20} />
               </a>
@@ -151,23 +220,55 @@ function Index() {
           </Reveal>
 
           <Reveal delay={150} className="justify-self-center">
-            <div className="animate-float-soft relative">
+            <div className="animate-float-soft relative grid place-items-center">
               <div
-                className="absolute -inset-6 rounded-[2.5rem] blur-2xl"
+                className="absolute -inset-10 rounded-full blur-3xl"
                 style={{ background: "var(--gradient-hero)" }}
                 aria-hidden="true"
               />
+              {/* rotating conic halo */}
+              <div
+                className="conic-ring absolute h-[19rem] w-[19rem] rounded-full opacity-60 blur-[2px] sm:h-[23rem] sm:w-[23rem]"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute h-[18rem] w-[18rem] rounded-full bg-background sm:h-[22rem] sm:w-[22rem]"
+                aria-hidden="true"
+              />
+              {/* orbiting nodes */}
+              <div
+                className="animate-orbit absolute h-[21rem] w-[21rem] sm:h-[25rem] sm:w-[25rem]"
+                aria-hidden="true"
+              >
+                <span className="absolute top-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary shadow-[0_0_14px_var(--primary)]" />
+                <span className="absolute bottom-6 left-3 h-2 w-2 rounded-full bg-accent shadow-[0_0_14px_var(--accent)]" />
+                <span className="absolute right-2 bottom-16 h-1.5 w-1.5 rounded-full bg-primary/70" />
+              </div>
               <img
                 src={avatar}
                 alt="Abstract neural network portrait representing Raunak Kumar Singh"
                 width={768}
                 height={768}
-                className="relative h-64 w-64 rounded-[2rem] border border-border object-cover sm:h-80 sm:w-80"
+                className="relative h-64 w-64 rounded-full border border-border object-cover sm:h-80 sm:w-80"
                 style={{ boxShadow: "var(--glow-primary)" }}
               />
+              <span className="glass-card absolute bottom-[-1.25rem] left-1/2 -translate-x-1/2 bg-card px-4 py-2 text-xs whitespace-nowrap text-muted-foreground">
+                <Sparkles size={12} className="mr-1.5 inline text-primary" />
+                AI / ML Learner
+              </span>
             </div>
           </Reveal>
         </div>
+
+        <a
+          href="#about"
+          aria-label="Scroll to about"
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary md:flex"
+        >
+          <span className="flex h-9 w-5 justify-center rounded-full border border-border pt-1.5">
+            <span className="animate-scroll-dot h-1.5 w-1.5 rounded-full bg-primary" />
+          </span>
+        </a>
       </section>
 
       {/* About */}
@@ -329,7 +430,7 @@ function Index() {
         <div className="grid gap-8 md:grid-cols-2">
           <Reveal className="space-y-3">
             {[
-              { icon: Mail, label: "singhraunak@gmail.com", href: "mailto:singhraunak@gmail.com" },
+              { icon: Mail, label: "singhraunak81026@gmail.com", href: "mailto:singhraunak81026@gmail.com" },
               { icon: Phone, label: "9068293089", href: "tel:9068293089" },
               {
                 icon: Github,
@@ -400,7 +501,7 @@ function Index() {
               </button>
               {sent && (
                 <p className="text-center text-xs text-primary">
-                  Thanks! Please also reach out directly at singhraunak@gmail.com.
+                  Thanks! Please also reach out directly at singhraunak81026@gmail.com.
                 </p>
               )}
             </form>
@@ -435,7 +536,7 @@ function Index() {
             >
               <Linkedin size={18} />
             </a>
-            <a href="mailto:singhraunak@gmail.com" aria-label="Email" className="hover:text-primary">
+            <a href="mailto:singhraunak81026@gmail.com" aria-label="Email" className="hover:text-primary">
               <Mail size={18} />
             </a>
           </div>
