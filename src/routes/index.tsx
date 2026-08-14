@@ -18,7 +18,7 @@ import {
 import { NeuralBackground } from "@/components/NeuralBackground";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/Reveal";
-import avatar from "@/assets/avatar.jpg";
+import avatar from "@/assets/raunak-avatar.jpg.asset.json";
 import aboutVisual from "@/assets/about-visual.jpg";
 
 export const Route = createFileRoute("/")({
