@@ -114,20 +114,46 @@ function Index() {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
     setSending(true);
     setError(null);
     try {
-      await sendContact({
+      // Keep saving to the backend (non-blocking for the visitor).
+      const saved = sendContact({
         data: {
-          name: String(formData.get("name") ?? "").trim() || undefined,
-          email: String(formData.get("email") ?? "").trim() || undefined,
-          message: String(formData.get("message") ?? "").trim(),
+          name: name || undefined,
+          email: email || undefined,
+          message,
         },
+      }).catch(() => undefined);
+
+      const res = await fetch("https://formspree.io/f/xljrlqly", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _replyto: email,
+          _subject: `New portfolio message${name ? ` from ${name}` : ""}`,
+        }),
       });
+      await saved;
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as
+          | { errors?: Array<{ message?: string }> }
+          | null;
+        throw new Error(body?.errors?.[0]?.message ?? "Formspree rejected the submission.");
+      }
       setSent(true);
       form.reset();
-    } catch {
-      setError("Something went wrong. Please email me directly at singhraunak81026@gmail.com.");
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : "";
+      setError(
+        `Couldn't send your message${detail ? ` (${detail})` : ""}. Please email me directly at singhraunak81026@gmail.com.`,
+      );
     } finally {
       setSending(false);
     }
