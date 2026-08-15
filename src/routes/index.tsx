@@ -106,10 +106,31 @@ function RotatingRole() {
 
 function Index() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const sendContact = useServerFn(submitContactMessage);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    setSending(true);
+    setError(null);
+    try {
+      await sendContact({
+        data: {
+          name: String(formData.get("name") ?? "").trim() || undefined,
+          email: String(formData.get("email") ?? "").trim() || undefined,
+          message: String(formData.get("message") ?? "").trim(),
+        },
+      });
+      setSent(true);
+      form.reset();
+    } catch {
+      setError("Something went wrong. Please email me directly at singhraunak81026@gmail.com.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
