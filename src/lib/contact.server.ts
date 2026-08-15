@@ -19,25 +19,5 @@ export async function handleContactSubmission(data: ContactSubmission) {
 
   if (error) throw new Error(error.message);
 
-  await notifyOwner(data, inserted.id, inserted.created_at);
-
-  return { ok: true as const };
-}
-
-async function notifyOwner(data: ContactSubmission, id: string, createdAt: string) {
-  try {
-    const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
-    await sendTemplateEmail("contact-notification", "singhraunak81026@gmail.com", {
-      templateData: {
-        name: data.name ?? "",
-        email: data.email ?? "",
-        message: data.message,
-        sentAt: new Date(createdAt).toUTCString(),
-      },
-      idempotencyKey: `contact-notification-${id}`,
-    });
-  } catch (err) {
-    // Message is already saved; never fail the visitor's submission on email issues.
-    console.error("contact notification email failed", err);
-  }
+  return { ok: true as const, id: inserted.id as string };
 }
