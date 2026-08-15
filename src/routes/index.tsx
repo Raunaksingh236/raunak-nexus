@@ -20,7 +20,6 @@ import {
 import { NeuralBackground } from "@/components/NeuralBackground";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/Reveal";
-import avatar from "@/assets/raunak-avatar.jpg.asset.json";
 import aboutVisual from "@/assets/about-visual.jpg";
 
 export const Route = createFileRoute("/")({
@@ -180,7 +179,7 @@ function Index() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-[1.15fr_0.85fr]">
+        <div className="relative mx-auto w-full max-w-3xl px-5">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-glass px-4 py-1.5 text-xs text-muted-foreground backdrop-blur-md">
               <span className="relative flex h-2 w-2">
@@ -266,46 +265,10 @@ function Index() {
                 <Mail size={20} />
               </a>
             </div>
-          </Reveal>
-
-          <Reveal delay={150} className="justify-self-center">
-            <div className="animate-float-soft relative grid place-items-center">
-              <div
-                className="absolute -inset-10 rounded-full blur-3xl"
-                style={{ background: "var(--gradient-hero)" }}
-                aria-hidden="true"
-              />
-              {/* rotating conic halo */}
-              <div
-                className="conic-ring absolute h-[19rem] w-[19rem] rounded-full opacity-60 blur-[2px] sm:h-[23rem] sm:w-[23rem]"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute h-[18rem] w-[18rem] rounded-full bg-background sm:h-[22rem] sm:w-[22rem]"
-                aria-hidden="true"
-              />
-              {/* orbiting nodes */}
-              <div
-                className="animate-orbit absolute h-[21rem] w-[21rem] sm:h-[25rem] sm:w-[25rem]"
-                aria-hidden="true"
-              >
-                <span className="absolute top-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary shadow-[0_0_14px_var(--primary)]" />
-                <span className="absolute bottom-6 left-3 h-2 w-2 rounded-full bg-accent shadow-[0_0_14px_var(--accent)]" />
-                <span className="absolute right-2 bottom-16 h-1.5 w-1.5 rounded-full bg-primary/70" />
-              </div>
-              <img
-                src={avatar.url}
-                alt="Profile photo of Raunak Kumar Singh"
-                width={600}
-                height={800}
-                className="relative h-64 w-64 rounded-full border border-border object-cover sm:h-80 sm:w-80"
-                style={{ boxShadow: "var(--glow-primary)" }}
-              />
-              <span className="glass-card absolute bottom-[-1.25rem] left-1/2 -translate-x-1/2 bg-card px-4 py-2 text-xs whitespace-nowrap text-muted-foreground">
-                <Sparkles size={12} className="mr-1.5 inline text-primary" />
-                AI / ML Learner
-              </span>
-            </div>
+            <span className="glass-card mt-8 inline-flex items-center bg-card px-4 py-2 text-xs whitespace-nowrap text-muted-foreground">
+              <Sparkles size={12} className="mr-1.5 inline text-primary" />
+              AI / ML Learner
+            </span>
           </Reveal>
         </div>
 
