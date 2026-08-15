@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitContactMessage } from "@/lib/contact.functions";
 import {
   ArrowRight,
   Brain,
@@ -104,10 +106,31 @@ function RotatingRole() {
 
 function Index() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const sendContact = useServerFn(submitContactMessage);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    setSending(true);
+    setError(null);
+    try {
+      await sendContact({
+        data: {
+          name: String(formData.get("name") ?? "").trim() || undefined,
+          email: String(formData.get("email") ?? "").trim() || undefined,
+          message: String(formData.get("message") ?? "").trim(),
+        },
+      });
+      setSent(true);
+      form.reset();
+    } catch {
+      setError("Something went wrong. Please email me directly at singhraunak81026@gmail.com.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -466,6 +489,7 @@ function Index() {
                 </label>
                 <input
                   id="name"
+                  name="name"
                   required
                   className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
                 />
@@ -476,6 +500,7 @@ function Index() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
@@ -487,6 +512,7 @@ function Index() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   required
                   className="w-full resize-none rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
@@ -494,16 +520,18 @@ function Index() {
               </div>
               <button
                 type="submit"
+                disabled={sending}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
               >
                 <Download size={16} className="hidden" />
-                Send Message <ArrowRight size={16} />
+                {sending ? "Sending..." : "Send Message"} <ArrowRight size={16} />
               </button>
               {sent && (
                 <p className="text-center text-xs text-primary">
-                  Thanks! Please also reach out directly at singhraunak81026@gmail.com.
+                  Message sent successfully — I'll get back to you soon.
                 </p>
               )}
+              {error && <p className="text-center text-xs text-destructive">{error}</p>}
             </form>
           </Reveal>
         </div>
