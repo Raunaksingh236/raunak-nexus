@@ -577,8 +577,13 @@ function Index() {
         <Reveal>
           <SectionTitle eyebrow="Contact" title="Let's connect" />
         </Reveal>
-        <div className="grid gap-8 md:grid-cols-2">
-          <Reveal className="space-y-3">
+        <div className="mx-auto flex max-w-2xl flex-col gap-10">
+          <Reveal>
+            <div className="glass-card p-7 sm:p-9">
+              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
+                My Connections
+              </h3>
+              <div className="mt-6 space-y-3">
             {[
               { icon: Mail, label: "singhraunak81026@gmail.com", href: "mailto:singhraunak81026@gmail.com" },
               { icon: Phone, label: "9068293089", href: "tel:9068293089" },
@@ -598,18 +603,29 @@ function Index() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="glass-card flex items-center gap-4 px-5 py-4"
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-glass px-5 py-4 backdrop-blur-md transition-all hover:translate-x-1 hover:border-primary/50 hover:bg-primary/5"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary transition-transform group-hover:scale-110">
                   <c.icon size={18} />
                 </span>
-                <span className="min-w-0 truncate text-sm">{c.label}</span>
+                <span className="min-w-0 truncate text-sm transition-colors group-hover:text-primary">
+                  {c.label}
+                </span>
+                <ArrowRight
+                  size={15}
+                  className="ml-auto shrink-0 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                />
               </a>
             ))}
+              </div>
+            </div>
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7">
+            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7 sm:p-9">
+              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
+                Send Me a Message
+              </h3>
               <div>
                 <label htmlFor="name" className="mb-1.5 block text-xs text-muted-foreground">
                   Name
