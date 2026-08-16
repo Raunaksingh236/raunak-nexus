@@ -297,7 +297,8 @@ function Index() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-hidden text-foreground">
+      <AiBackground />
       <Navbar />
 
       {/* Hero */}
@@ -311,7 +312,6 @@ function Index() {
           style={{ background: "var(--gradient-hero)" }}
           aria-hidden="true"
         />
-        <NeuralBackground />
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"
           aria-hidden="true"
