@@ -1,23 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { submitContactMessage } from "@/lib/contact.functions";
 import {
   ArrowRight,
+  BarChart3,
   Brain,
+  ChevronLeft,
+  ChevronRight,
   Code2,
   Database,
   Download,
   Github,
   GraduationCap,
+  LineChart,
   Linkedin,
+  Lightbulb,
   Mail,
   Phone,
   Rocket,
+  Sigma,
   Sparkles,
   Terminal,
 } from "lucide-react";
-import { NeuralBackground } from "@/components/NeuralBackground";
+import { AiBackground } from "@/components/AiBackground";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/Reveal";
 import aboutVisual from "@/assets/about-visual.jpg";
@@ -50,7 +56,139 @@ const skills = [
   { name: "CSS", level: 65, icon: Code2 },
   { name: "JavaScript", level: 50, icon: Code2 },
   { name: "SQL (Basics)", level: 40, icon: Database },
+  { name: "Pandas", level: 45, icon: Database },
+  { name: "NumPy", level: 45, icon: Sigma },
+  { name: "Matplotlib", level: 40, icon: LineChart },
 ];
+
+const projectIdeas = [
+  {
+    title: "AI-Powered Student Performance Predictor",
+    tech: ["Python", "NumPy", "Pandas", "Matplotlib", "Machine Learning"],
+    description:
+      "Predict student performance using academic data and visualize the important factors affecting results.",
+  },
+  {
+    title: "Smart Expense Tracker & Financial Analyzer",
+    tech: ["Python", "Pandas", "Matplotlib", "SQL"],
+    description:
+      "Track expenses, analyze spending patterns and generate useful financial visualizations.",
+  },
+  {
+    title: "AI Resume Analyzer",
+    tech: ["Python", "NLP", "Machine Learning", "Web Development"],
+    description:
+      "Analyze resumes and provide suggestions for improving skills, keywords and job compatibility.",
+  },
+  {
+    title: "E-Commerce Sales Analytics Dashboard",
+    tech: ["Python", "Pandas", "Matplotlib", "SQL", "Data Visualization"],
+    description:
+      "Analyze sales, customers, products and revenue trends through an interactive analytics dashboard.",
+  },
+  {
+    title: "AI-Based Disease Prediction System",
+    tech: ["Python", "Pandas", "NumPy", "Machine Learning"],
+    description:
+      "Create an educational machine-learning project that predicts possible conditions from a dataset.",
+  },
+  {
+    title: "Personal AI Study Assistant",
+    tech: ["Python", "AI/ML", "SQL", "Web Technologies"],
+    description:
+      "Build an assistant that helps students organize study material, track progress and answer study-related questions.",
+  },
+];
+
+function ProjectIdeasCarousel() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const go = useCallback((dir: number) => {
+    setIndex((i) => (i + dir + projectIdeas.length) % projectIdeas.length);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => go(1), 4500);
+    return () => clearInterval(id);
+  }, [paused, index, go]);
+
+  const idea = projectIdeas[index]!;
+
+  return (
+    <div
+      className="mx-auto max-w-3xl"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="glass-card relative flex min-h-[19rem] flex-col justify-between overflow-hidden p-7 sm:min-h-[17rem] sm:p-9">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden="true"
+        />
+        <div key={index} className="animate-fade-in relative">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] tracking-widest text-primary uppercase">
+              <Lightbulb size={12} /> Planned Project
+            </span>
+            <span className="text-[11px] tracking-widest text-muted-foreground uppercase">
+              Idea #{index + 1} · Coming soon
+            </span>
+          </div>
+          <h3 className="mt-4 text-xl font-semibold sm:text-2xl">{idea.title}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{idea.description}</p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {idea.tech.map((t) => (
+              <li
+                key={t}
+                className="rounded-full border border-border bg-glass px-3 py-1 text-xs text-muted-foreground backdrop-blur-md transition-colors hover:border-primary hover:text-primary"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative mt-7 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            {projectIdeas.map((p, i) => (
+              <button
+                key={p.title}
+                type="button"
+                aria-label={`Show idea ${i + 1}`}
+                aria-current={i === index}
+                onClick={() => setIndex(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === index ? "w-6 bg-primary" : "w-2 bg-muted-foreground/40 hover:bg-primary/60"
+                }`}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label="Previous project idea"
+              onClick={() => go(-1)}
+              className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-glass text-muted-foreground backdrop-blur-md transition-colors hover:border-primary hover:text-primary"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next project idea"
+              onClick={() => go(1)}
+              className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-glass text-muted-foreground backdrop-blur-md transition-colors hover:border-primary hover:text-primary"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const exploring = [
   "Artificial Intelligence",
@@ -159,7 +297,8 @@ function Index() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-hidden text-foreground">
+      <AiBackground />
       <Navbar />
 
       {/* Hero */}
@@ -173,7 +312,6 @@ function Index() {
           style={{ background: "var(--gradient-hero)" }}
           aria-hidden="true"
         />
-        <NeuralBackground />
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"
           aria-hidden="true"
@@ -439,8 +577,13 @@ function Index() {
         <Reveal>
           <SectionTitle eyebrow="Contact" title="Let's connect" />
         </Reveal>
-        <div className="grid gap-8 md:grid-cols-2">
-          <Reveal className="space-y-3">
+        <div className="mx-auto flex max-w-2xl flex-col gap-10">
+          <Reveal>
+            <div className="glass-card p-7 sm:p-9">
+              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
+                My Connections
+              </h3>
+              <div className="mt-6 space-y-3">
             {[
               { icon: Mail, label: "singhraunak81026@gmail.com", href: "mailto:singhraunak81026@gmail.com" },
               { icon: Phone, label: "9068293089", href: "tel:9068293089" },
@@ -460,18 +603,29 @@ function Index() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="glass-card flex items-center gap-4 px-5 py-4"
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-glass px-5 py-4 backdrop-blur-md transition-all hover:translate-x-1 hover:border-primary/50 hover:bg-primary/5"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary transition-transform group-hover:scale-110">
                   <c.icon size={18} />
                 </span>
-                <span className="min-w-0 truncate text-sm">{c.label}</span>
+                <span className="min-w-0 truncate text-sm transition-colors group-hover:text-primary">
+                  {c.label}
+                </span>
+                <ArrowRight
+                  size={15}
+                  className="ml-auto shrink-0 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                />
               </a>
             ))}
+              </div>
+            </div>
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7">
+            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7 sm:p-9">
+              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
+                Send Me a Message
+              </h3>
               <div>
                 <label htmlFor="name" className="mb-1.5 block text-xs text-muted-foreground">
                   Name
@@ -524,6 +678,27 @@ function Index() {
             </form>
           </Reveal>
         </div>
+      </section>
+
+      {/* Project ideas */}
+      <section id="ideas" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <div className="mb-12 text-center">
+            <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">
+              Future Work
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Project Ideas I Want to Build
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+              <BarChart3 size={13} className="mr-1.5 inline text-primary" />
+              Concepts on my roadmap — not built yet, but planned as I grow my AI/ML skills.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <ProjectIdeasCarousel />
+        </Reveal>
       </section>
 
       <footer className="border-t border-border py-10">
