@@ -680,6 +680,27 @@ function Index() {
         </div>
       </section>
 
+      {/* Project ideas */}
+      <section id="ideas" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <div className="mb-12 text-center">
+            <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">
+              Future Work
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Project Ideas I Want to Build
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+              <BarChart3 size={13} className="mr-1.5 inline text-primary" />
+              Concepts on my roadmap — not built yet, but planned as I grow my AI/ML skills.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <ProjectIdeasCarousel />
+        </Reveal>
+      </section>
+
       <footer className="border-t border-border py-10">
         <div className="mx-auto grid max-w-6xl gap-4 px-5 text-center sm:flex sm:items-center sm:justify-between sm:text-left">
           <div>
