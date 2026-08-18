@@ -299,3 +299,145 @@
 @utility animate-scroll-dot {
   animation: scroll-dot 1.8s ease-in-out infinite;
 }
+
+/* ---- Futuristic polish ---- */
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes success-ring {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.78 0.16 210 / 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 22px oklch(0.78 0.16 210 / 0);
+  }
+}
+
+@utility animate-pop-in {
+  animation: pop-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-success-ring {
+  animation: success-ring 1.6s ease-out infinite;
+}
+
+/* Glowing animated border wrapper */
+@utility neon-frame {
+  position: relative;
+  border-radius: var(--radius-3xl);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      120deg,
+      oklch(0.78 0.16 210 / 0.55),
+      oklch(0.68 0.18 300 / 0.45),
+      oklch(0.78 0.16 210 / 0.15),
+      oklch(0.78 0.16 210 / 0.55)
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 12s ease infinite;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Premium glass surface with inner highlight */
+@utility glass-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(
+      160deg,
+      oklch(0.99 0 0 / 0.07),
+      oklch(0.99 0 0 / 0.02) 45%,
+      oklch(0.99 0 0 / 0.05)
+    ),
+    color-mix(in oklab, var(--card) 55%, transparent);
+  backdrop-filter: blur(22px) saturate(130%);
+  box-shadow:
+    0 1px 0 0 oklch(1 0 0 / 0.06) inset,
+    0 24px 60px -30px oklch(0 0 0 / 0.9);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--primary) 40%, transparent);
+    box-shadow:
+      0 1px 0 0 oklch(1 0 0 / 0.08) inset,
+      0 30px 70px -30px oklch(0 0 0 / 0.95),
+      var(--glow-primary);
+  }
+}
+
+@utility circuit-bg {
+  background-image:
+    linear-gradient(to right, oklch(0.78 0.16 210 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.78 0.16 210 / 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 20% 30%, oklch(0.68 0.18 300 / 0.05), transparent 60%);
+  background-size:
+    38px 38px,
+    38px 38px,
+    100% 100%;
+}
+
+@utility input-futuristic {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--input);
+  background: color-mix(in oklab, var(--secondary) 40%, transparent);
+  padding: 0.7rem 0.9rem 0.7rem 2.5rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+
+  &:focus {
+    border-color: color-mix(in oklab, var(--primary) 70%, transparent);
+    background: color-mix(in oklab, var(--secondary) 60%, transparent);
+    box-shadow: 0 0 0 3px oklch(0.78 0.16 210 / 0.14);
+  }
+}
