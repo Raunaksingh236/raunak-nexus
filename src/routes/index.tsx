@@ -702,32 +702,36 @@ function Index() {
         </Reveal>
 
         <Reveal>
-          <div className="glass-card grid place-items-center px-6 py-16 text-center">
+          <div className="glass-panel circuit-bg grid place-items-center px-6 py-14 text-center">
             <span className="grid h-14 w-14 place-items-center rounded-2xl bg-secondary text-primary">
               <Rocket size={22} />
             </span>
-            <h3 className="mt-5 text-2xl font-semibold">My project journey starts here</h3>
+            <h3 className="mt-5 text-2xl font-semibold">From concepts to real AI/ML projects</h3>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              No published projects yet — I'm focused on learning fundamentals and preparing to
-              build. This space is reserved for AI/ML experiments, Python tools, data analysis
-              notebooks and small software projects as they ship.
+              I haven't shipped published projects yet — what I have is a path I'm actively walking:
+              fundamentals, problem solving, Python, data, and now the first steps toward building
+              things that actually work end to end.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="relative mt-12 border-l border-border pl-8">
+          {journeySteps.map((step, i) => (
+            <Reveal key={step.title} delay={i * 60} className="relative pb-8 last:pb-0">
+              <span className="absolute top-1.5 -left-[41px] grid h-6 w-6 place-items-center rounded-full border border-primary/60 bg-background text-[10px] font-semibold text-primary">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <article className="glass-panel p-6">
+                <h3 className="text-base font-semibold sm:text-lg">{step.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-10">
           <Reveal>
-            <div className="glass-card h-full p-7">
-              <h3 className="text-lg font-semibold">Learning Journey</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                I have no professional experience yet. My time goes into academic coursework,
-                developing technical skills, exploring new technologies and preparing to build
-                practical projects that solve real problems.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="glass-card h-full p-7">
+            <div className="glass-panel h-full p-7">
               <h3 className="text-lg font-semibold">Areas I'm Exploring</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {exploring.map((area) => (
