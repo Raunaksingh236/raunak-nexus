@@ -26,6 +26,8 @@ import {
 import { AiBackground } from "@/components/AiBackground";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/Reveal";
+import { SkillModal, type SkillDetail } from "@/components/SkillModal";
+import aiVideo from "@/assets/aiml-loop.mp4.asset.json";
 import aboutVisual from "@/assets/about-visual.jpg";
 
 export const Route = createFileRoute("/")({
@@ -48,17 +50,154 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const skills = [
-  { name: "Python", level: 70, icon: Terminal, featured: true },
-  { name: "AI & Machine Learning", level: 55, icon: Brain, featured: true },
-  { name: "Java", level: 50, icon: Code2 },
-  { name: "HTML", level: 75, icon: Code2 },
-  { name: "CSS", level: 65, icon: Code2 },
-  { name: "JavaScript", level: 50, icon: Code2 },
-  { name: "SQL (Basics)", level: 40, icon: Database },
-  { name: "Pandas", level: 45, icon: Database },
-  { name: "NumPy", level: 45, icon: Sigma },
-  { name: "Matplotlib", level: 40, icon: LineChart },
+const skills: SkillDetail[] = [
+  {
+    name: "Python",
+    level: 70,
+    icon: Terminal,
+    featured: true,
+    intro:
+      "Python is the language I use most while learning AI and machine learning — it keeps code readable so I can focus on the ideas.",
+    what: "A high-level, general-purpose programming language known for simple, readable syntax.",
+    usedFor:
+      "AI and machine learning, automation and scripting, data analysis, backend and general software development.",
+    whyUseful:
+      "Almost every major AI/ML library (NumPy, Pandas, scikit-learn, TensorFlow, PyTorch) is built for Python, so it is the fastest route from an idea to a working model.",
+    status: "Actively practising — comfortable with the fundamentals, still learning deeper topics.",
+  },
+  {
+    name: "AI & Machine Learning",
+    level: 55,
+    icon: Brain,
+    featured: true,
+    intro:
+      "This is my core area of study at university, and the direction I want my career to grow in.",
+    what: "Artificial Intelligence is building systems that perform tasks needing human-like reasoning; Machine Learning is the subset where models learn patterns from data instead of being explicitly programmed.",
+    usedFor:
+      "Predictions, recommendations, classification, image and language understanding, and decision support systems.",
+    whyUseful:
+      "ML lets software improve from data and handle problems that are impractical to solve with fixed rules.",
+    status: "Currently learning core concepts and preparing my first practical projects.",
+  },
+  {
+    name: "Java",
+    level: 50,
+    icon: Code2,
+    intro: "Java is where I strengthen my object-oriented thinking and program structure.",
+    what: "A strongly typed, object-oriented programming language that runs on the JVM.",
+    usedFor: "Backend systems, enterprise software, Android apps and large application development.",
+    whyUseful:
+      "Its strict structure teaches clean design and OOP concepts that carry over into every other language I use.",
+    status: "Learning through coursework and practice problems.",
+  },
+  {
+    name: "HTML",
+    level: 75,
+    icon: Code2,
+    intro: "HTML is the foundation of everything I build for the web, including this portfolio.",
+    what: "The markup language that defines the structure and content of a web page.",
+    usedFor: "Creating headings, text, images, forms, links and the semantic layout of websites.",
+    whyUseful:
+      "Well-structured HTML makes pages accessible and is required before any styling or interactivity works.",
+    status: "Comfortable with the basics and improving semantic/accessible markup.",
+  },
+  {
+    name: "CSS",
+    level: 65,
+    icon: Code2,
+    intro: "CSS is how I turn plain structure into an interface that actually feels designed.",
+    what: "The styling language that controls how HTML elements look and are laid out.",
+    usedFor: "Colors, spacing, typography, layouts, animations and responsive design.",
+    whyUseful:
+      "Good CSS makes projects and dashboards clear and usable — presentation matters as much as the logic behind it.",
+    status: "Learning layout systems, responsive design and modern effects.",
+  },
+  {
+    name: "JavaScript",
+    level: 50,
+    icon: Code2,
+    intro: "JavaScript is how I make the things I build respond to the person using them.",
+    what: "A programming language that runs in the browser to add behaviour to web pages.",
+    usedFor: "Interactivity, form handling, dynamic content, data fetching and web applications.",
+    whyUseful:
+      "It lets me put models, data and results in front of people through an interface instead of just a terminal.",
+    status: "Learning the fundamentals and DOM/UI behaviour.",
+  },
+  {
+    name: "SQL (Basics)",
+    level: 40,
+    icon: Database,
+    intro: "SQL is my starting point for working with real stored data rather than sample files.",
+    what: "A query language used to store, retrieve, manipulate and analyse data in relational databases.",
+    usedFor: "Filtering and joining tables, aggregating results and preparing datasets for analysis.",
+    whyUseful:
+      "Most real-world data lives in databases, so SQL is often the first step in any data or ML workflow.",
+    status: "Beginner — learning queries, joins and aggregations.",
+  },
+  {
+    name: "Pandas",
+    level: 45,
+    icon: Database,
+    intro: "Pandas is the tool I use to actually understand a dataset before modelling it.",
+    what: "A Python library for data manipulation, cleaning and analysis built around DataFrames.",
+    usedFor: "Loading CSV/Excel data, handling missing values, filtering, grouping and summarising.",
+    whyUseful:
+      "Real data is messy — Pandas handles the cleaning and preparation that most ML work depends on.",
+    status: "Learning core DataFrame operations through practice datasets.",
+  },
+  {
+    name: "NumPy",
+    level: 45,
+    icon: Sigma,
+    intro: "NumPy is where the mathematics behind machine learning starts to make sense to me.",
+    what: "A Python library providing efficient numerical arrays and fast mathematical operations.",
+    usedFor: "Vector and matrix maths, statistics and numerical computation on large arrays.",
+    whyUseful:
+      "It powers the array maths under Pandas and most ML frameworks, so understanding it helps me understand models.",
+    status: "Learning arrays, indexing and vectorised operations.",
+  },
+  {
+    name: "Matplotlib",
+    level: 40,
+    icon: LineChart,
+    intro: "Matplotlib is how I check whether the patterns I think exist in data really do.",
+    what: "A Python visualisation library for creating graphs and charts.",
+    usedFor: "Line charts, bar charts, scatter plots and histograms for exploring results.",
+    whyUseful:
+      "Visualising data reveals trends, outliers and model behaviour that raw numbers hide.",
+    status: "Learning to build clear plots for data analysis.",
+  },
+];
+
+const journeySteps = [
+  {
+    title: "It started with fundamentals",
+    body: "My first real interest wasn't a framework — it was the moment a small program did exactly what I told it to. I started with programming basics, syntax, loops and logic, and slowly learned to break a problem down before writing a single line.",
+  },
+  {
+    title: "Thinking in problems, not code",
+    body: "Working through programming problems changed how I think. I stopped memorising solutions and started noticing patterns: what the input really is, what the edge cases are, and how to reason toward an answer step by step.",
+  },
+  {
+    title: "Choosing Python as my foundation",
+    body: "As I moved deeper into my AIML degree, Python became my base. It got out of the way and let me focus on the actual concepts — how data is shaped, how a model learns, and why an approach works or fails.",
+  },
+  {
+    title: "Learning to listen to data",
+    body: "Data analysis was the turning point. With NumPy, Pandas and Matplotlib I began cleaning messy datasets, asking questions of them and plotting the answers — realising that most of AI/ML is understanding data long before training anything.",
+  },
+  {
+    title: "Building breadth around AIML",
+    body: "Alongside AIML I picked up Java for structured, object-oriented thinking, HTML, CSS and JavaScript to put ideas in front of people, and SQL to work with data where it actually lives.",
+  },
+  {
+    title: "From separate skills to real projects",
+    body: "Right now I'm connecting these pieces — turning a dataset into an analysis, an analysis into a model, and a model into something a person can use. My planned project ideas are the experiments I'm working toward, not finished work.",
+  },
+  {
+    title: "Where I'm heading",
+    body: "My goal is to become an AI/ML developer who can take a real problem end to end: understand the data, build a sound model and ship it as technology that genuinely helps someone.",
+  },
 ];
 
 const projectIdeas = [
@@ -245,6 +384,7 @@ function Index() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [openSkill, setOpenSkill] = useState<SkillDetail | null>(null);
   const sendContact = useServerFn(submitContactMessage);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -428,14 +568,32 @@ function Index() {
         </Reveal>
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <Reveal>
-            <img
-              src={aboutVisual}
-              alt="Glowing neural network visualization"
-              loading="lazy"
-              width={1200}
-              height={900}
-              className="w-full rounded-3xl border border-border object-cover"
-            />
+            <div className="neon-frame relative overflow-hidden rounded-3xl">
+              <video
+                src={aiVideo.url}
+                poster={aboutVisual}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Animated AI and machine learning neural network visualisation"
+                className="motion-reduce:hidden aspect-[4/3] w-full rounded-3xl object-cover"
+              />
+              <img
+                src={aboutVisual}
+                alt="Glowing neural network visualization"
+                loading="lazy"
+                width={1200}
+                height={900}
+                className="hidden aspect-[4/3] w-full rounded-3xl object-cover motion-reduce:block"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl"
+                style={{ background: "var(--gradient-hero)" }}
+                aria-hidden="true"
+              />
+            </div>
           </Reveal>
           <Reveal delay={120} className="space-y-5 text-muted-foreground">
             <p className="leading-relaxed">
@@ -494,19 +652,32 @@ function Index() {
         <Reveal>
           <SectionTitle eyebrow="Skills" title="Currently developing" />
         </Reveal>
+        <p className="-mt-8 mb-8 text-sm text-muted-foreground">
+          <Sparkles size={13} className="mr-1.5 inline text-primary" />
+          Tap any skill to read what it is and how far along I am.
+        </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, i) => (
             <Reveal key={skill.name} delay={i * 70}>
-              <div
-                className={`glass-card h-full p-6 ${
+              <button
+                type="button"
+                onClick={() => setOpenSkill(skill)}
+                aria-label={`Learn more about ${skill.name}`}
+                className={`glass-panel group h-full w-full p-6 text-left ${
                   skill.featured ? "ring-1 ring-primary/40" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary transition-transform group-hover:scale-110">
                     <skill.icon size={18} />
                   </span>
-                  <h3 className="min-w-0 truncate font-semibold">{skill.name}</h3>
+                  <h3 className="min-w-0 truncate font-semibold transition-colors group-hover:text-primary">
+                    {skill.name}
+                  </h3>
+                  <ArrowRight
+                    size={15}
+                    className="ml-auto shrink-0 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
                 </div>
                 <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
                   <div
@@ -517,10 +688,11 @@ function Index() {
                 <p className="mt-3 text-xs text-muted-foreground">
                   {skill.featured ? "Core focus · actively practising" : "Learning & improving"}
                 </p>
-              </div>
+              </button>
             </Reveal>
           ))}
         </div>
+        {openSkill && <SkillModal skill={openSkill} onClose={() => setOpenSkill(null)} />}
       </section>
 
       {/* Journey: projects + learning + exploring */}
@@ -530,32 +702,36 @@ function Index() {
         </Reveal>
 
         <Reveal>
-          <div className="glass-card grid place-items-center px-6 py-16 text-center">
+          <div className="glass-panel circuit-bg grid place-items-center px-6 py-14 text-center">
             <span className="grid h-14 w-14 place-items-center rounded-2xl bg-secondary text-primary">
               <Rocket size={22} />
             </span>
-            <h3 className="mt-5 text-2xl font-semibold">My project journey starts here</h3>
+            <h3 className="mt-5 text-2xl font-semibold">From concepts to real AI/ML projects</h3>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              No published projects yet — I'm focused on learning fundamentals and preparing to
-              build. This space is reserved for AI/ML experiments, Python tools, data analysis
-              notebooks and small software projects as they ship.
+              I haven't shipped published projects yet — what I have is a path I'm actively walking:
+              fundamentals, problem solving, Python, data, and now the first steps toward building
+              things that actually work end to end.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="relative mt-12 border-l border-border pl-8">
+          {journeySteps.map((step, i) => (
+            <Reveal key={step.title} delay={i * 60} className="relative pb-8 last:pb-0">
+              <span className="absolute top-1.5 -left-[41px] grid h-6 w-6 place-items-center rounded-full border border-primary/60 bg-background text-[10px] font-semibold text-primary">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <article className="glass-panel p-6">
+                <h3 className="text-base font-semibold sm:text-lg">{step.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-10">
           <Reveal>
-            <div className="glass-card h-full p-7">
-              <h3 className="text-lg font-semibold">Learning Journey</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                I have no professional experience yet. My time goes into academic coursework,
-                developing technical skills, exploring new technologies and preparing to build
-                practical projects that solve real problems.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="glass-card h-full p-7">
+            <div className="glass-panel h-full p-7">
               <h3 className="text-lg font-semibold">Areas I'm Exploring</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {exploring.map((area) => (
