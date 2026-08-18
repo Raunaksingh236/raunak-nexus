@@ -384,6 +384,7 @@ function Index() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [openSkill, setOpenSkill] = useState<SkillDetail | null>(null);
   const sendContact = useServerFn(submitContactMessage);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -567,14 +568,32 @@ function Index() {
         </Reveal>
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <Reveal>
-            <img
-              src={aboutVisual}
-              alt="Glowing neural network visualization"
-              loading="lazy"
-              width={1200}
-              height={900}
-              className="w-full rounded-3xl border border-border object-cover"
-            />
+            <div className="neon-frame relative overflow-hidden rounded-3xl">
+              <video
+                src={aiVideo.url}
+                poster={aboutVisual}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Animated AI and machine learning neural network visualisation"
+                className="motion-reduce:hidden aspect-[4/3] w-full rounded-3xl object-cover"
+              />
+              <img
+                src={aboutVisual}
+                alt="Glowing neural network visualization"
+                loading="lazy"
+                width={1200}
+                height={900}
+                className="hidden aspect-[4/3] w-full rounded-3xl object-cover motion-reduce:block"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl"
+                style={{ background: "var(--gradient-hero)" }}
+                aria-hidden="true"
+              />
+            </div>
           </Reveal>
           <Reveal delay={120} className="space-y-5 text-muted-foreground">
             <p className="leading-relaxed">
