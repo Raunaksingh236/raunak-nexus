@@ -652,19 +652,32 @@ function Index() {
         <Reveal>
           <SectionTitle eyebrow="Skills" title="Currently developing" />
         </Reveal>
+        <p className="-mt-8 mb-8 text-sm text-muted-foreground">
+          <Sparkles size={13} className="mr-1.5 inline text-primary" />
+          Tap any skill to read what it is and how far along I am.
+        </p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, i) => (
             <Reveal key={skill.name} delay={i * 70}>
-              <div
-                className={`glass-card h-full p-6 ${
+              <button
+                type="button"
+                onClick={() => setOpenSkill(skill)}
+                aria-label={`Learn more about ${skill.name}`}
+                className={`glass-panel group h-full w-full p-6 text-left ${
                   skill.featured ? "ring-1 ring-primary/40" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-primary transition-transform group-hover:scale-110">
                     <skill.icon size={18} />
                   </span>
-                  <h3 className="min-w-0 truncate font-semibold">{skill.name}</h3>
+                  <h3 className="min-w-0 truncate font-semibold transition-colors group-hover:text-primary">
+                    {skill.name}
+                  </h3>
+                  <ArrowRight
+                    size={15}
+                    className="ml-auto shrink-0 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
                 </div>
                 <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
                   <div
@@ -675,10 +688,11 @@ function Index() {
                 <p className="mt-3 text-xs text-muted-foreground">
                   {skill.featured ? "Core focus · actively practising" : "Learning & improving"}
                 </p>
-              </div>
+              </button>
             </Reveal>
           ))}
         </div>
+        {openSkill && <SkillModal skill={openSkill} onClose={() => setOpenSkill(null)} />}
       </section>
 
       {/* Journey: projects + learning + exploring */}
