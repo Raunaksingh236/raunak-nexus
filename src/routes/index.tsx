@@ -754,6 +754,27 @@ function Index() {
         </div>
       </section>
 
+      {/* Project ideas */}
+      <section id="ideas" className="mx-auto max-w-6xl px-5 py-24">
+        <Reveal>
+          <div className="mb-12 text-center">
+            <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">
+              Future Work
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Project Ideas I Want to Build
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+              <BarChart3 size={13} className="mr-1.5 inline text-primary" />
+              Concepts on my roadmap — not built yet, but planned as I grow my AI/ML skills.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <ProjectIdeasCarousel />
+        </Reveal>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-6xl px-5 py-24">
         <Reveal>
@@ -804,83 +825,77 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={onSubmit} className="glass-card space-y-4 p-7 sm:p-9">
-              <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
-                Send Me a Message
-              </h3>
-              <div>
-                <label htmlFor="name" className="mb-1.5 block text-xs text-muted-foreground">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-1.5 block text-xs text-muted-foreground">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="mb-1.5 block text-xs text-muted-foreground">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full resize-none rounded-xl border border-input bg-secondary/40 px-4 py-2.5 text-sm outline-none focus:border-primary"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={sending}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
-              >
-                <Download size={16} className="hidden" />
-                {sending ? "Sending..." : "Send Message"} <ArrowRight size={16} />
-              </button>
-              {sent && (
-                <p className="text-center text-xs text-primary">
-                  Message sent successfully — I'll get back to you soon.
-                </p>
-              )}
-              {error && <p className="text-center text-xs text-destructive">{error}</p>}
-            </form>
+            <div className="neon-frame">
+              <form onSubmit={onSubmit} className="glass-panel circuit-bg space-y-5 p-7 sm:p-9">
+                <div className="flex items-center justify-center gap-2">
+                  <MessageSquare size={15} className="text-primary" />
+                  <h3 className="text-sm font-semibold tracking-[0.25em] text-primary uppercase">
+                    Send Me a Message
+                  </h3>
+                </div>
+
+                <div>
+                  <label htmlFor="name" className="mb-1.5 block text-[11px] tracking-widest text-muted-foreground uppercase">
+                    Name
+                  </label>
+                  <div className="relative">
+                    <User size={15} className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <input id="name" name="name" required placeholder="Your name" className="input-futuristic" />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="mb-1.5 block text-[11px] tracking-widest text-muted-foreground uppercase">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <AtSign size={15} className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <input id="email" name="email" type="email" required placeholder="you@example.com" className="input-futuristic" />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="mb-1.5 block text-[11px] tracking-widest text-muted-foreground uppercase">
+                    Message
+                  </label>
+                  <div className="relative">
+                    <MessageSquare size={15} className="pointer-events-none absolute top-4 left-3.5 text-muted-foreground" />
+                    <textarea id="message" name="message" rows={4} required placeholder="Write your message..." className="input-futuristic resize-none" />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70"
+                  style={{ boxShadow: "var(--glow-primary)" }}
+                >
+                  {sending ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <Send size={16} className="transition-transform group-hover:translate-x-0.5" />
+                    </>
+                  )}
+                </button>
+
+                {sent && (
+                  <div className="animate-pop-in flex items-center gap-3 rounded-2xl border border-primary/40 bg-primary/5 p-4">
+                    <span className="animate-success-ring grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/15 text-primary">
+                      <CheckCircle2 size={18} />
+                    </span>
+                    <p className="text-sm font-medium text-primary">
+                      THANK YOU!! Your message is submitted to Raunak
+                    </p>
+                  </div>
+                )}
+                {error && <p className="text-center text-xs text-destructive">{error}</p>}
+              </form>
+            </div>
           </Reveal>
         </div>
-      </section>
-
-      {/* Project ideas */}
-      <section id="ideas" className="mx-auto max-w-6xl px-5 py-24">
-        <Reveal>
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">
-              Future Work
-            </p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Project Ideas I Want to Build
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-              <BarChart3 size={13} className="mr-1.5 inline text-primary" />
-              Concepts on my roadmap — not built yet, but planned as I grow my AI/ML skills.
-            </p>
-          </div>
-        </Reveal>
-        <Reveal>
-          <ProjectIdeasCarousel />
-        </Reveal>
       </section>
 
       <footer className="border-t border-border py-10">
