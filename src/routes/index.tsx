@@ -4,8 +4,10 @@ import { useServerFn } from "@tanstack/react-start";
 import { submitContactMessage } from "@/lib/contact.functions";
 import {
   ArrowRight,
+  AtSign,
   BarChart3,
   Brain,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   Code2,
@@ -16,12 +18,16 @@ import {
   LineChart,
   Linkedin,
   Lightbulb,
+  Loader2,
   Mail,
+  MessageSquare,
   Phone,
   Rocket,
+  Send,
   Sigma,
   Sparkles,
   Terminal,
+  User,
 } from "lucide-react";
 import { AiBackground } from "@/components/AiBackground";
 import { Navbar } from "@/components/Navbar";
