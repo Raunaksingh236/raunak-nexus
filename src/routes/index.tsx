@@ -267,7 +267,7 @@ function ProjectIdeasCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="glass-card relative flex min-h-[19rem] flex-col justify-between overflow-hidden p-7 sm:min-h-[17rem] sm:p-9">
+      <div className="glass-panel circuit-bg relative flex min-h-[19rem] flex-col justify-between overflow-hidden p-7 sm:min-h-[17rem] sm:p-9">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{ background: "var(--gradient-hero)" }}
@@ -641,7 +641,7 @@ function Index() {
             <span className="absolute top-6 -left-[41px] grid h-6 w-6 place-items-center rounded-full border border-primary bg-background">
               <GraduationCap size={13} className="text-primary" />
             </span>
-            <article className="glass-card p-7">
+            <article className="glass-panel circuit-bg p-7">
               <p className="text-xs tracking-widest text-primary uppercase">2nd Year · Ongoing</p>
               <h3 className="mt-2 text-xl font-semibold">
                 B.Tech in Artificial Intelligence &amp; Machine Learning
