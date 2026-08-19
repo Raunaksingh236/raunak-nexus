@@ -782,7 +782,8 @@ function Index() {
         </Reveal>
         <div className="mx-auto flex max-w-2xl flex-col gap-10">
           <Reveal>
-            <div className="glass-card p-7 sm:p-9">
+            <div className="neon-frame">
+            <div className="glass-panel circuit-bg p-7 sm:p-9">
               <h3 className="text-center text-sm font-semibold tracking-[0.25em] text-primary uppercase">
                 My Connections
               </h3>
@@ -821,6 +822,7 @@ function Index() {
               </a>
             ))}
               </div>
+            </div>
             </div>
           </Reveal>
 
