@@ -576,7 +576,7 @@ function Index() {
           <Reveal>
             <div className="neon-frame relative overflow-hidden rounded-3xl">
               <video
-                src={aiVideo.url}
+                src="/aiml-loop.mp4"
                 poster={aboutVisual}
                 autoPlay
                 loop
