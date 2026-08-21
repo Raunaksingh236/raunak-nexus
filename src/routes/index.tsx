@@ -475,7 +475,7 @@ function Index() {
               <span className="hidden sm:inline">Class of 2029 · GLA University</span>
             </span>
             <div className="mt-6 inline-block name-plate neon-frame">
-              <h1 className="text-4xl leading-[1.05] font-bold tracking-tight text-balance sm:text-6xl lg:text-7xl">
+              <h1 className="w-fit max-w-full text-4xl leading-[1.05] font-bold tracking-tight text-balance sm:text-6xl lg:text-7xl">
                 <span className="brand-name animate-name-reveal" data-text="RAUNAK KUMAR SINGH">
                   RAUNAK KUMAR SINGH
                 </span>
