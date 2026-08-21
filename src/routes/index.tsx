@@ -33,7 +33,7 @@ import { AiBackground } from "@/components/AiBackground";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/Reveal";
 import { SkillModal, type SkillDetail } from "@/components/SkillModal";
-import aiVideo from "@/assets/aiml-loop.mp4.asset.json";
+
 import aboutVisual from "@/assets/about-visual.jpg";
 
 export const Route = createFileRoute("/")({
