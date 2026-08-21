@@ -441,3 +441,114 @@
     box-shadow: 0 0 0 3px oklch(0.78 0.16 210 / 0.14);
   }
 }
+
+/* ---- Premium Hero name treatment ---- */
+
+@keyframes name-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes name-sheen {
+  0% {
+    background-position: -120% 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 220% 0;
+    opacity: 0;
+  }
+}
+
+@utility animate-name-reveal {
+  animation: name-reveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@utility brand-name {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background-image: var(--gradient-text);
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  filter: drop-shadow(0 0 14px oklch(0.78 0.16 210 / 0.35))
+    drop-shadow(0 0 34px oklch(0.68 0.18 300 / 0.22));
+
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      90deg,
+      transparent 40%,
+      oklch(0.99 0 0 / 0.65) 50%,
+      oklch(0.82 0.15 210 / 0.75) 55%,
+      transparent 65%
+    );
+    background-size: 200% 100%;
+    background-position: -120% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: name-sheen 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      animation: none;
+      background: none;
+    }
+  }
+}
+
+@utility name-plate {
+  display: inline-block;
+  position: relative;
+  border-radius: var(--radius-2xl);
+  padding: 0.5rem 1rem;
+  background:
+    linear-gradient(
+      160deg,
+      oklch(0.99 0 0 / 0.08),
+      oklch(0.99 0 0 / 0.02) 45%,
+      oklch(0.99 0 0 / 0.05)
+    ),
+    color-mix(in oklab, var(--card) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
+  backdrop-filter: blur(18px) saturate(130%);
+  box-shadow:
+    0 1px 0 0 oklch(1 0 0 / 0.06) inset,
+    0 0 55px -12px oklch(0.78 0.16 210 / 0.25);
+
+  @media (min-width: 640px) {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-3xl);
+  }
+}
