@@ -721,6 +721,43 @@ function Index() {
           </div>
         </Reveal>
 
+        <Reveal delay={80}>
+          <article className="glass-panel neon-frame mt-8 p-7">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary text-primary">
+                <Rocket size={19} />
+              </span>
+              <h3 className="text-lg font-semibold sm:text-xl">AI Assisted Portfolio Generator</h3>
+              <span className="rounded-full border border-primary/50 px-3 py-1 text-[10px] font-semibold tracking-[0.18em] text-primary uppercase">
+                Completed Project
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              An AI-assisted portfolio generator that helps users turn their resume and personal
+              information into a structured, personalized portfolio using AI-powered processing.
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {["Python", "Flask", "AI/Gemini", "HTML", "CSS"].map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://github.com/Raunaksingh236/AI-ASSISTED-PORTFOLIO-GENERATOR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-primary/50 bg-secondary px-5 py-3 text-xs font-semibold tracking-[0.15em] text-primary uppercase transition-all hover:bg-primary hover:text-primary-foreground sm:w-auto"
+            >
+              <Github size={16} />
+              View on GitHub
+            </a>
+          </article>
+        </Reveal>
+
         <div className="relative mt-12 border-l border-border pl-8">
           {journeySteps.map((step, i) => (
             <Reveal key={step.title} delay={i * 60} className="relative pb-8 last:pb-0">
