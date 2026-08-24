@@ -794,6 +794,175 @@ function Index() {
           </Reveal>
         </div>
       </section>
+      {/* My Certificates */}
+<section id="certificates" className="mx-auto max-w-6xl px-5 py-24">
+  <Reveal>
+    <div className="mb-12 text-center">
+      <p className="mb-2 text-sm font-medium tracking-[0.25em] text-primary uppercase">
+        Achievements
+      </p>
+
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        My Certificates
+      </h2>
+
+      <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+        Certifications and learning achievements from my journey in
+        Artificial Intelligence, Cloud Computing, and Technology.
+      </p>
+    </div>
+  </Reveal>
+
+  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+    {/* Azure Fundamentals */}
+    <Reveal>
+      <div className="group overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-primary/60 hover:shadow-[0_0_35px_hsl(var(--primary)/0.18)]">
+
+        <div className="aspect-[4/3] overflow-hidden bg-black/30">
+          <img
+            src="/certificates/AZ-900%20CERTIFICATE_page-0001.jpg"
+            alt="Microsoft Azure Fundamentals Certificate"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div className="p-6">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs text-primary">
+              Cloud Computing
+            </span>
+
+            <span className="text-xs text-muted-foreground">
+              2026
+            </span>
+          </div>
+
+          <h3 className="text-xl font-semibold">
+            Microsoft Azure Fundamentals
+          </h3>
+
+          <p className="mt-2 text-sm text-muted-foreground">
+            Azure / Cloud Computing
+          </p>
+
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Demonstrates foundational knowledge of Microsoft Azure,
+            cloud concepts, services, security, and cloud computing.
+          </p>
+
+          <a
+            href="/certificates/AZ-900%20CERTIFICATE_page-0001.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex w-full items-center justify-center rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+          >
+            View Certificate →
+          </a>
+        </div>
+      </div>
+    </Reveal>
+
+
+    {/* AI & Cyber Security Awareness */}
+    <Reveal>
+      <div className="group overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-primary/60 hover:shadow-[0_0_35px_hsl(var(--primary)/0.18)]">
+
+        <div className="aspect-[4/3] overflow-hidden bg-black/30">
+          <img
+            src="/certificates/AI%20AND%20CYBER%20SECURITY%20AWARENESS_page-0001%20%281%29.jpg"
+            alt="AI and Cyber Security Awareness Certificate"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div className="p-6">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs text-primary">
+              AI & Cyber Security
+            </span>
+
+            <span className="text-xs text-muted-foreground">
+              2026
+            </span>
+          </div>
+
+          <h3 className="text-xl font-semibold">
+            AI and Cyber Security Awareness
+          </h3>
+
+          <p className="mt-2 text-sm text-muted-foreground">
+            TCS iON — AI for All
+          </p>
+
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Certificate of completion focused on Artificial Intelligence
+            awareness and fundamental cybersecurity concepts.
+          </p>
+
+          <a
+            href="/certificates/AI%20AND%20CYBER%20SECURITY%20AWARENESS_page-0001%20%281%29.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex w-full items-center justify-center rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+          >
+            View Certificate →
+          </a>
+        </div>
+      </div>
+    </Reveal>
+
+
+    {/* Generative AI Essentials */}
+    <Reveal>
+      <div className="group overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-primary/60 hover:shadow-[0_0_35px_hsl(var(--primary)/0.18)]">
+
+        <div className="aspect-[4/3] overflow-hidden bg-black/30">
+          <img
+            src="/certificates/GENERATIVE%20AI%20ESSENTIALS_page-0001.jpg"
+            alt="Generative AI Essentials Certificate"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div className="p-6">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs text-primary">
+              Generative AI
+            </span>
+
+            <span className="text-xs text-muted-foreground">
+              2026
+            </span>
+          </div>
+
+          <h3 className="text-xl font-semibold">
+            Generative AI Essentials
+          </h3>
+
+          <p className="mt-2 text-sm text-muted-foreground">
+            TCS iON — AI for All
+          </p>
+
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Certificate of completion focused on the fundamentals and
+            practical understanding of Generative Artificial Intelligence.
+          </p>
+
+          <a
+            href="/certificates/GENERATIVE%20AI%20ESSENTIALS_page-0001.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex w-full items-center justify-center rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+          >
+            View Certificate →
+          </a>
+        </div>
+      </div>
+    </Reveal>
+
+  </div>
+</section>
 
       {/* Project ideas */}
       <section id="ideas" className="mx-auto max-w-6xl px-5 py-24">
